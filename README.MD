@@ -23,9 +23,9 @@ O JHipster Registry é um servidor de descoberta onde todos os serviços, durant
 
 Os serviços da solução são APIs REST utilizadas para consumo e geração de dados dentro dos modelos. Todas as regras negociais são controladas por eles.
 
-### sgcservice
+### usuarioservice
 
-É o serviço responsável por gerenciar usuários e permissões.
+// TODO 
 
 # Ambiente de desenvolvimento
 
