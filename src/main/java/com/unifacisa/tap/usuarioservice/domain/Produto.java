@@ -11,7 +11,7 @@ public class Produto {
     private static final long serialVersionUID = 2134812446083923546L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nome;

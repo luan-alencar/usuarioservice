@@ -4,14 +4,17 @@ import com.unifacisa.tap.usuarioservice.domain.Produto;
 import com.unifacisa.tap.usuarioservice.repository.ProdutoRepository;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
 import com.unifacisa.tap.usuarioservice.service.mapper.ProdutoMapper;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProdutoService {
 
@@ -24,18 +27,17 @@ public class ProdutoService {
                 .collect(Collectors.toList());
     }
 
+    @SneakyThrows
     public ProdutoDTO buscarProdutoPorId(Long id) {
-        Produto Produto = produtoRepository.findById(id).orElse(null);
-        return ProdutoMapper.INSTANCE.produtoToDTO(Produto);
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
+        return ProdutoMapper.INSTANCE.produtoToDTO(produto);
     }
 
-    public ProdutoDTO criarOuAtualizarProduto(ProdutoDTO produtoDTO) {
-        if (Objects.isNull(produtoRepository.findById(produtoDTO.getId()))) {
-            Produto Produto = ProdutoMapper.INSTANCE.dtoToProduto(produtoDTO);
-            return ProdutoMapper.INSTANCE.produtoToDTO(produtoRepository.save(Produto));
-        }
-        Produto ProdutoAtualizado = ProdutoMapper.INSTANCE.dtoToProduto(produtoDTO);
-        return ProdutoMapper.INSTANCE.produtoToDTO(produtoRepository.save(ProdutoAtualizado));
+    public ProdutoDTO salvarProduto(ProdutoDTO produtoDTO) {
+        Produto produto = ProdutoMapper.INSTANCE.dtoToProduto(produtoDTO);
+        produtoRepository.save(produto);
+        return ProdutoMapper.INSTANCE.produtoToDTO(produto);
     }
 
     public void excluirProduto(Long id) {

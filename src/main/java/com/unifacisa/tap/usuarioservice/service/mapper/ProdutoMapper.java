@@ -3,6 +3,7 @@ package com.unifacisa.tap.usuarioservice.service.mapper;
 import com.unifacisa.tap.usuarioservice.domain.Produto;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
@@ -14,4 +15,5 @@ public interface ProdutoMapper {
     ProdutoDTO produtoToDTO(Produto produto);
 
     Produto dtoToProduto(ProdutoDTO dto);
+
 }
