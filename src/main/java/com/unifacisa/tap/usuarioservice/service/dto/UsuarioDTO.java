@@ -2,7 +2,6 @@ package com.unifacisa.tap.usuarioservice.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 public class UsuarioDTO implements Serializable {
 
     @NotNull(message = "CPF não pode ser nulo")
-    @CPF(message = "CPF Inválido")
     private String cpf;
 
     @NotNull(message = "Nome não pode ser nulo")
