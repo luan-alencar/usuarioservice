@@ -21,8 +21,8 @@ public class ProdutoService {
     private final ProdutoRepository produtoRepository;
 
     public List<ProdutoDTO> listarProdutos() {
-        List<Produto> Produtos = produtoRepository.findAll();
-        return Produtos.stream()
+        List<Produto> produtos = produtoRepository.findAll();
+        return produtos.stream()
                 .map(ProdutoMapper.INSTANCE::produtoToDTO)
                 .collect(Collectors.toList());
     }
@@ -42,6 +42,10 @@ public class ProdutoService {
 
     public void excluirProduto(Long id) {
         produtoRepository.deleteById(id);
+    }
+
+    public String helloWorld() {
+        return "Hello World!";
     }
 
 }

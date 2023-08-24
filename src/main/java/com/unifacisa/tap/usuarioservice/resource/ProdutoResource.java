@@ -5,6 +5,7 @@ import com.unifacisa.tap.usuarioservice.repository.ProdutoRepository;
 import com.unifacisa.tap.usuarioservice.service.ProdutoService;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
 import com.unifacisa.tap.usuarioservice.service.mapper.ProdutoMapper;
+import com.unifacisa.tap.usuarioservice.utils.ConstantsUtils;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.PRODUTOS;
+
 @RestController
-@RequestMapping("/api/produtos")
+@RequestMapping(PRODUTOS)
 @RequiredArgsConstructor
 public class ProdutoResource {
 
@@ -52,5 +55,10 @@ public class ProdutoResource {
         return ResponseEntity.ok(produtoService.salvarProduto(produtoAtualizado));
     }
 
+    @GetMapping
+    @RequestMapping("/hello")
+    public ResponseEntity<String> hellorWorld() {
+        return ResponseEntity.ok(this.produtoService.helloWorld());
+    }
 }
 
