@@ -5,4 +5,6 @@ public class ConstantsUtils {
     // PRODUTOS
     public static final String PRODUTOS = "/api/produtos";
 
+    public static final String USUARIOS = "/api/usuarios";
+
 }

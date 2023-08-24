@@ -1,34 +1,49 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
-import com.unifacisa.tap.usuarioservice.domain.Usuario;
-import com.unifacisa.tap.usuarioservice.service.EntityCrudUtils;
+import com.unifacisa.tap.usuarioservice.service.UsuarioService;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.USUARIOS;
+
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(USUARIOS)
 public class UsuarioResource  {
 
-    public UsuarioDTO buscar(Long id) {
-        return null;
+    private final UsuarioService usuarioService;
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
+        List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
     }
 
-    public List<UsuarioDTO> listar() {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
+        UsuarioDTO usuarioDTO = usuarioService.buscarUsuario(id);
+        return ResponseEntity.ok(usuarioDTO);
     }
 
-    public void salvar(UsuarioDTO dto) {
-
+    @PostMapping
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        UsuarioDTO usuario = usuarioService.salvarUsuario(usuarioDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
-    public void deletar(Long id) {
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirUsuario(@PathVariable Long id) {
+        usuarioService.excluirUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 
-    public UsuarioDTO atualizar(UsuarioDTO dto) {
-        return null;
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO dto) {
+        return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
     }
 }
