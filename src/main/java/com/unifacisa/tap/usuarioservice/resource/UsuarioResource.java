@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.USUARIOS;
+import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.USUARIOS_ENDPOINT;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(USUARIOS)
+@RequestMapping(USUARIOS_ENDPOINT)
 public class UsuarioResource  {
 
     private final UsuarioService usuarioService;

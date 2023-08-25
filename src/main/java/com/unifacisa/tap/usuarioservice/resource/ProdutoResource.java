@@ -1,24 +1,19 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
-import com.unifacisa.tap.usuarioservice.domain.Produto;
 import com.unifacisa.tap.usuarioservice.repository.ProdutoRepository;
 import com.unifacisa.tap.usuarioservice.service.ProdutoService;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
-import com.unifacisa.tap.usuarioservice.service.mapper.ProdutoMapper;
-import com.unifacisa.tap.usuarioservice.utils.ConstantsUtils;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.PRODUTOS;
+import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.PRODUTOS_ENDPOINT;
 
 @RestController
-@RequestMapping(PRODUTOS)
+@RequestMapping(PRODUTOS_ENDPOINT)
 @RequiredArgsConstructor
 public class ProdutoResource {
 
