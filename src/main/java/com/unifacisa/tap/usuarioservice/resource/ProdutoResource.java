@@ -50,10 +50,5 @@ public class ProdutoResource {
         return ResponseEntity.ok(produtoService.salvarProduto(produtoAtualizado));
     }
 
-    @GetMapping
-    @RequestMapping("/hello")
-    public ResponseEntity<String> hellorWorld() {
-        return ResponseEntity.ok(this.produtoService.helloWorld());
-    }
 }
 
