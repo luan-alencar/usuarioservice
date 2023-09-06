@@ -1,6 +1,7 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
 import com.unifacisa.tap.usuarioservice.repository.ProdutoRepository;
+import com.unifacisa.tap.usuarioservice.resource.contract.ProdutoContract;
 import com.unifacisa.tap.usuarioservice.service.ProdutoService;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.PRODUTOS_END
 @RestController
 @RequestMapping(PRODUTOS_ENDPOINT)
 @RequiredArgsConstructor
-public class ProdutoResource {
+public class ProdutoResource implements ProdutoContract {
 
     private final ProdutoRepository produtoRepository;
     private final ProdutoService produtoService;
