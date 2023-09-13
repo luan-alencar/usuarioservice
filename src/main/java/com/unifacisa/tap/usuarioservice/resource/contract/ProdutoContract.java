@@ -50,8 +50,9 @@ public interface ProdutoContract {
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = NotFoundException.class))})
     ResponseEntity<Void> excluirProduto(@PathVariable Long id);
 
-    @Operation(summary = "Atualiza produto por id", description = "Produto atualizado com sucesso")
-    @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso")
+    @Operation(summary = "Atualiza produto", description = "Produto atualizado com sucesso")
+    @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso",
+            content = { @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ProdutoDTO.class))})
     @ApiResponse(responseCode = "500", description = "Internal Server Error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Exception.class))})
     @ApiResponse(responseCode = "404", description = "Not Found",

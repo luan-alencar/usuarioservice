@@ -8,9 +8,6 @@ import lombok.Setter;
 @Setter
 public class ProdutoDTO {
 
-    @Schema(description = "Id do produto", example = "1")
-    private Long id;
-
     @Schema(description = "Nome do produto", example = "Boneca da Barbie")
     private String nome;
 

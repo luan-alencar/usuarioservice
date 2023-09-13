@@ -1,5 +1,6 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
+import com.unifacisa.tap.usuarioservice.resource.contract.UsuarioContract;
 import com.unifacisa.tap.usuarioservice.service.UsuarioService;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.USUARIOS_END
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(USUARIOS_ENDPOINT)
-public class UsuarioResource  {
+public class UsuarioResource implements UsuarioContract {
 
     private final UsuarioService usuarioService;
 
