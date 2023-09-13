@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class CadastroProdutoDTO {
 
+
     private Long id;
     private UsuarioDTO usuario;
     private ProdutoDTO produto;
