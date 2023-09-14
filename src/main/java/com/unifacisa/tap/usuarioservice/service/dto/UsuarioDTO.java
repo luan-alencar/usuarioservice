@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -32,6 +33,14 @@ public class UsuarioDTO implements Serializable {
     @NotNull(message = "Data de nascimento não pode ser nulo")
     private LocalDate dataNascimento;
 
+    private byte[] imagem;
+
     private Boolean admin;
+
+    public void setImagem(byte[] imagem) {
+        if (Objects.nonNull(imagem)) {
+            this.imagem = imagem;
+        }
+    }
 
 }

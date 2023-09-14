@@ -1,5 +1,6 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
+import com.unifacisa.tap.usuarioservice.domain.Usuario;
 import com.unifacisa.tap.usuarioservice.service.UsuarioService;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import static com.unifacisa.tap.usuarioservice.utils.ConstantsUtils.USUARIOS_END
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(USUARIOS_ENDPOINT)
-public class UsuarioResource  {
+public class UsuarioResource {
 
     private final UsuarioService usuarioService;
 
@@ -31,9 +32,9 @@ public class UsuarioResource  {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuario = usuarioService.salvarUsuario(usuarioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody Usuario usuario) {
+        UsuarioDTO usuarioDTO = usuarioService.salvarUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -43,7 +44,7 @@ public class UsuarioResource  {
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO dto) {
-        return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(usuarioService.salvarUsuario(usuario));
     }
 }
