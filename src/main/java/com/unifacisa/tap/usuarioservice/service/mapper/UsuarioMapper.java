@@ -1,9 +1,12 @@
 package com.unifacisa.tap.usuarioservice.service.mapper;
 
 import com.unifacisa.tap.usuarioservice.domain.Usuario;
+import com.unifacisa.tap.usuarioservice.service.dto.UsuarioBuscaNomeCPFDTO;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
@@ -19,5 +22,8 @@ public interface UsuarioMapper {
 
     // Inverso
     Usuario DTOtoUsuario(UsuarioDTO dto);
+
+    // Filtragem da busca com DTO com dois parametros nome e CPF
+    List<UsuarioBuscaNomeCPFDTO> usuarioByNomaAndCPFDTO(List<Usuario> usuario);
 
 }

@@ -2,6 +2,7 @@ package com.unifacisa.tap.usuarioservice.resource;
 
 import com.unifacisa.tap.usuarioservice.domain.Usuario;
 import com.unifacisa.tap.usuarioservice.service.UsuarioService;
+import com.unifacisa.tap.usuarioservice.service.dto.UsuarioBuscaNomeCPFDTO;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,19 @@ public class UsuarioResource {
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO usuarioDTO = usuarioService.buscarUsuario(id);
         return ResponseEntity.ok(usuarioDTO);
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<UsuarioBuscaNomeCPFDTO>> buscarUsuariosPorNomeECpf(
+            @RequestParam("nome") String nome,
+            @RequestParam("cpf") String cpf) {
+
+        List<UsuarioBuscaNomeCPFDTO> usuarios = usuarioService.findUsuariosByNomeAndCpf(nome, cpf);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(usuarios);
+        }
     }
 
     @PostMapping

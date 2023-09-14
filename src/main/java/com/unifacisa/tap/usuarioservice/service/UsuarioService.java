@@ -2,6 +2,7 @@ package com.unifacisa.tap.usuarioservice.service;
 
 import com.unifacisa.tap.usuarioservice.domain.Usuario;
 import com.unifacisa.tap.usuarioservice.repository.UsuarioRepository;
+import com.unifacisa.tap.usuarioservice.service.dto.UsuarioBuscaNomeCPFDTO;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import com.unifacisa.tap.usuarioservice.service.exception.RegraNegocioException;
 import com.unifacisa.tap.usuarioservice.service.mapper.UsuarioMapper;
@@ -38,6 +39,11 @@ public class UsuarioService {
         return usuarios.stream()
                 .map(UsuarioMapper.INSTANCE::usuarioToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<UsuarioBuscaNomeCPFDTO> findUsuariosByNomeAndCpf(String nome, String cpf) {
+        List<Usuario> usuarios = usuarioRepository.findUsuariosByNomeAndCpf(nome, cpf);
+        return UsuarioMapper.INSTANCE.usuarioByNomaAndCPFDTO(usuarios);
     }
 
     @SneakyThrows
