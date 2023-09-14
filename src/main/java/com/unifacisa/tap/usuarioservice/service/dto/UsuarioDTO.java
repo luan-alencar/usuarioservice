@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 public class UsuarioDTO implements Serializable {
 
-    private Long id;
 
     @NotNull(message = "CPF não pode ser nulo")
     private String cpf;

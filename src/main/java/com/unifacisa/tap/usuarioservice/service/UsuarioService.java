@@ -41,7 +41,7 @@ public class UsuarioService {
     }
 
     @SneakyThrows
-    private UsuarioDTO save(Usuario usuario, MultipartFile file) {
+    public UsuarioDTO save(Usuario usuario, MultipartFile file) {
         try {
             if (Objects.nonNull(file)) {
                 byte[] bytes = file.getBytes();
@@ -54,11 +54,13 @@ public class UsuarioService {
             log.error(e.getMessage(), e);
             throw new RegraNegocioException(e.getMessage());
         }
-        return UsuarioMapper.INSTANCE.usuarioToDTO(usuario);
+
+        return this.salvarUsuario(usuario);
     }
 
     public UsuarioDTO salvarUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
+        UsuarioDTO dto = usuarioMapper.usuarioToDTO(usuario);
         return UsuarioMapper.INSTANCE.usuarioToDTO(usuario);
     }
 

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,15 +33,15 @@ public class UsuarioResource {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody Usuario usuario) {
-        UsuarioDTO usuarioDTO = usuarioService.salvarUsuario(usuario);
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody Usuario usuario, MultipartFile file) {
+        UsuarioDTO usuarioDTO = usuarioService.save(usuario, file);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirUsuario(@PathVariable Long id) {
         usuarioService.excluirUsuario(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
