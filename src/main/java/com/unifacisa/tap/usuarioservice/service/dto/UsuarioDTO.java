@@ -10,12 +10,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
 public class UsuarioDTO implements Serializable {
 
-    private Long id;
 
     @NotNull(message = "CPF não pode ser nulo")
     @Schema(description = "Cpf usuario", example = "000.000.000-00")
@@ -40,6 +40,14 @@ public class UsuarioDTO implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
+    private byte[] imagem;
+
     private Boolean admin;
+
+    public void setImagem(byte[] imagem) {
+        if (Objects.nonNull(imagem)) {
+            this.imagem = imagem;
+        }
+    }
 
 }

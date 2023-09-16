@@ -23,4 +23,8 @@ public class Usuario implements Serializable {
     private String telefone;
     private LocalDate dataNascimento;
     private boolean admin;
+
+    @Lob
+//    @Column(columnDefinition = "Blob")
+    private byte[] imagem;
 }

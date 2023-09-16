@@ -3,6 +3,7 @@ package com.unifacisa.tap.usuarioservice.service;
 import com.unifacisa.tap.usuarioservice.domain.Produto;
 import com.unifacisa.tap.usuarioservice.repository.ProdutoRepository;
 import com.unifacisa.tap.usuarioservice.service.dto.ProdutoDTO;
+import com.unifacisa.tap.usuarioservice.service.exception.RegraNegocioException;
 import com.unifacisa.tap.usuarioservice.service.mapper.ProdutoMapper;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +32,7 @@ public class ProdutoService {
     @SneakyThrows
     public ProdutoDTO buscarProdutoPorId(Long id) {
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
+                .orElseThrow(() -> new RegraNegocioException("Produto não encontrado"));
         return ProdutoMapper.INSTANCE.produtoToDTO(produto);
     }
 
@@ -41,11 +43,7 @@ public class ProdutoService {
     }
 
     public void excluirProduto(Long id) {
-        produtoRepository.deleteById(id);
+        Optional<ProdutoDTO> produtoDTO = Optional.ofNullable(this.buscarProdutoPorId(id));
+         produtoRepository.deleteById(id);
     }
-
-    public String helloWorld() {
-        return "Hello World!";
-    }
-
 }

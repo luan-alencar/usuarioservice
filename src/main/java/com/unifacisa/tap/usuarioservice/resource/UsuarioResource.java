@@ -1,12 +1,15 @@
 package com.unifacisa.tap.usuarioservice.resource;
 
 import com.unifacisa.tap.usuarioservice.resource.contract.UsuarioContract;
+import com.unifacisa.tap.usuarioservice.domain.Usuario;
 import com.unifacisa.tap.usuarioservice.service.UsuarioService;
+import com.unifacisa.tap.usuarioservice.service.dto.UsuarioBuscaNomeCPFDTO;
 import com.unifacisa.tap.usuarioservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,20 +34,33 @@ public class UsuarioResource implements UsuarioContract {
         return ResponseEntity.ok(usuarioDTO);
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<List<UsuarioBuscaNomeCPFDTO>> buscarUsuariosPorNomeECpf(
+            @RequestParam("nome") String nome,
+            @RequestParam("cpf") String cpf) {
+
+        List<UsuarioBuscaNomeCPFDTO> usuarios = usuarioService.findUsuariosByNomeAndCpf(nome, cpf);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(usuarios);
+        }
+    }
+
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuario = usuarioService.salvarUsuario(usuarioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+    public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody Usuario usuario, MultipartFile file) {
+        UsuarioDTO usuarioDTO = usuarioService.save(usuario, file);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirUsuario(@PathVariable Long id) {
         usuarioService.excluirUsuario(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO dto) {
-        return ResponseEntity.ok(usuarioService.salvarUsuario(dto));
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(usuarioService.salvarUsuario(usuario));
     }
 }
